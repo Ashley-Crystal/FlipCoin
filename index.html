@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FLIPCOIN</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles for dark theme */
+        body {
+            background-image: url('coins.png'); /* Add background image to the entire webpage */
+            background-color: #343a40; /* Set background color */
+            background-size: cover;
+            color: #ffffff;
+            font-family: "Comic Sans MS", cursive;
+            margin: 0; /* Remove default margin */
+        }
+        /* Center content both horizontally and vertically */
+        .container-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* Phone-like appearance */
+        .phone-container {
+            border: 5px solid #ffffff; /* Change border color and thickness */
+            padding: 20px; /* Adjust padding for smaller screens */
+            background-color: #212529;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        /* Custom style for result */
+        .result {
+            font-size: 14px; /* Adjust font size for smaller screens */
+            margin-top: 15px; /* Adjust margin */
+        }
+        /* Custom style for score */
+        .score {
+            font-size: 14px; /* Adjust font size for smaller screens */
+            margin-top: 15px; /* Adjust margin */
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-center">
+        <div class="phone-container">
+            <h1 class="mb-3">Flip Coin</h1>
+            <div class="btn-group mb-3" role="group">
+                <button class="btn btn-primary" onclick="flipCoin('Head')">HEADS</button>
+                <button class="btn btn-primary" onclick="flipCoin('Tail')">TAILS</button>
+            </div>
+            <p class="result mt-2" id="result"></p>
+            <p class="score" id="score">Wins: 0, Losses: 0</p>
+        </div>
+    </div>
+    <script>
+        let wins = 0;
+        let losses = 0;
+
+        function flipCoin(playerChoice) {
+            const rand = Math.random();
+            let comp = '';
+
+            if (rand >= 0 && rand < 1 / 2) {
+                comp = 'Head';
+            } else if (rand >= 1 / 2 && rand < 1) {
+                comp = 'Tail';
+            }
+
+            let res = '';
+            if (comp === playerChoice) {
+                res = 'Win';
+                wins++;
+            } else {
+                res = 'Lose';
+                losses++;
+            }
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `It's ${comp}! You ${res}`;
+            
+            const scoreElement = document.getElementById('score');
+            scoreElement.innerHTML = `Wins: ${wins}, Losses: ${losses}`;
+        }
+    </script>
+</body>
+</html>
